@@ -12,10 +12,14 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v3.8.5">
+
+    <!--폰트-->
+    <link href="https://fonts.googleapis.com/css?family=Gaegu|Hi+Melody|Poor+Story|Shadows+Into+Light+Two" rel="stylesheet">
+
     <title>Album example · Bootstrap</title>
 
     <!-- Bootstrap core CSS -->
-<link href="/docs/4.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link href="/docs/4.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
 
     <style>
@@ -29,6 +33,26 @@
           font-size: 3.5rem;
         }
       }
+
+      p{
+        font-family: 'Poor Story', cursive;
+        font-size: 20px;
+      }
+
+      h4,p{
+            font-family: 'Poor Story', cursive;
+      }
+
+      a.navbar-brand{
+        font-family: 'Poor Story', cursive;
+        font-size: 28px;
+      }
+
+      a{
+        font-family: 'Poor Story', cursive;
+        font-size: 20px;
+      }
+
     </style>
     <!-- Custom styles for this template -->
     <link href="album.css" rel="stylesheet">
@@ -40,24 +64,24 @@
       <div class="row">
         <div class="col-sm-8 col-md-7 py-4">
           <h4 class="text-white">About</h4>
-          <p class="text-muted">Add some information about the album below, the author, or any other background context. Make it a few sentences long so folks can pick up some informative tidbits. Then, link them off to some social networking sites or contact information.</p>
+          <p class="text-muted">이곳은 바로 어린시절, 활동, 좋아하는 미디어 콘텐츠 등을 볼 수 있는 포트폴리오 공간!<br>자유롭게 꾸며보자!</p>
         </div>
         <div class="col-sm-4 offset-md-1 py-4">
           <h4 class="text-white">Contact</h4>
           <ul class="list-unstyled">
-            <li><a href="#" class="text-white">Follow on Twitter</a></li>
-            <li><a href="#" class="text-white">Like on Facebook</a></li>
-            <li><a href="#" class="text-white">Email me</a></li>
+            <li><a href="{% url 'home'%}" class="text-muted">HOME으로 돌아가기</a></li>
+            <!-- <li><a href="#" class="text-white">Like on Facebook</a></li>
+            <li><a href="#" class="text-white">Email me</a></li> -->
           </ul>
         </div>
       </div>
     </div>
   </div>
-  <div class="navbar navbar-dark bg-dark shadow-sm">
+  <div class="navbar navbar-dark shadow-sm" style="background-color: #7BA6C7;">
     <div class="container d-flex justify-content-between">
-      <a href="#" class="navbar-brand d-flex align-items-center">
+      <a href="{% url 'portfolio'%}" class="navbar-brand d-flex align-items-center">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2" focusable="false" aria-hidden="true"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
-        <strong>Album</strong>
+        <strong>Portfolio Album</strong>
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -73,8 +97,8 @@
       <h1 class="jumbotron-heading">My portfolio</h1>
       <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
       <p>
-        <a href="#" class="btn btn-primary my-2">Main call to action</a>
-        <a href="#" class="btn btn-secondary my-2">Secondary action</a>
+        <a href="{% url 'new_portfolio' %}" class="btn btn-primary my-2">글쓰러 가기</a>
+        <a href="{% url 'portfolio' %}" class="btn btn-secondary my-2">다시 보기</a>
       </p>
     </div>
   </section>
