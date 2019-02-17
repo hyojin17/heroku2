@@ -1,12 +1,18 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
+from django.core.paginator import Paginator
 from .models import Blog
 #같은 폴더에 있는 models라는 파이썬 파일로부터 Blog클래스를 import
+from .form import BlogPost
 
 
 def home(request):
     blogs = Blog.objects#blogs라는 변수에 객체목록을 저장 #쿼리셋
-    return render(request, 'home.html', {'blogs':blogs})#세번째 인자로 사전형객체로 blogs키값으로 blogs를 받는다.
+    blog_list = Blog.objects.all()
+    paginator = Paginator(blog_list, 3)
+    page = request.GET.get('page')
+    posts = paginator.get_page(page)
+    return render(request, 'home.html', {'blogs':blogs, 'posts':posts})#세번째 인자로 사전형객체로 blogs키값으로 blogs를 받는다.
 
 def detail(request, blog_id):
 #home에 비해 인자를 하나 더 받는다.
@@ -28,6 +34,17 @@ def create(request):#입력받은 내용을 데이터베이스에 넣어주는 �
     return redirect('/blog/'+str(blog.id))#redirect(URL)은 이 위에 있는 것들을 다 처리하고 이 URL로 넘기세요 라는 뜻
     #str을 써준이유는 url은 항상 str인데, blog.id는 int형이기때문에 문자열로 형변환.
     #위에 있는 것이 다 처리되고, save로 데이터베이스에 저장되고, /blog/str(blog_id)로 곧장 이동이 된다.
-    
+
+def blogpost(request):
+    if request.method == 'POST':
+        form = BlogPost(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)  
+            post.pub_date = timezone.now()
+            post.save()
+            return redirect('home')
+    else:
+        form = BlogPost()
+        return render(request, 'new.html', {'form':form})
 
 

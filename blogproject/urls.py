@@ -12,7 +12,7 @@ urlpatterns = [
     path('portfolio/', portfolio.views.portfolio, name="portfolio"),
     path('portfolio/new_portfolio/', portfolio.views.new_portfolio, name="new_portfolio"),
     path('portfolio/create_portfolio', portfolio.views.create_portfolio, name="create_portfolio"),
-
+    path('accounts/', include('accounts.urls')),
 ] 
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

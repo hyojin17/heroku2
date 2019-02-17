@@ -3,8 +3,9 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
-{% block contents %}<!--이부분이 base.html에서 말한 서로 다른 contents가 들어갈 내용이에요 라고 알려주는 것.-->
+
 <body>
+{% block contents %}<!--이부분이 base.html에서 말한 서로 다른 contents가 들어갈 내용이에요 라고 알려주는 것.-->
     <!-- <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" ><rect fill="#777" width="100%" height="100%"/></svg> -->
     <div class="jumbotron">
             <!-- <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" ><rect fill="#777" width="100%" height="100%"/></svg> -->
@@ -15,17 +16,7 @@
             </div>
     </div>
     <br>
-    {% for blog in blogs.all %}
-        <!-- <div class="container">
-            <div class="card">
-                <div class="card-body">
-                    <h2 class="card-title">{{blog.title}}</h2>
-                    <h6 class="card-subtitle mb-2 text-muted">{{blog.pub_date}}</h6>
-                    <p class="card-text">{{blog.summary}}</p>
-                    <a href="{% url 'detail' blog.id %}" class="card-link">...more</a>
-                </div>
-            </div><br>
-        </div> -->
+    {% for blog in posts %}
         <div class="container">
             <div class="card border-light mb-3">
                 <h5 class="card-header" style="background-color: #D6E7F4;"> <i class="far fa-sticky-note"></i> &nbsp{{blog.title}}</h5>
@@ -37,9 +28,36 @@
             </div><br>
         </div>
     {% endfor %}
-    
 
 
-    
-</body>
+    <div class="container">
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            {% if posts.has_previous %}<!--만약에 post가 이전페이지가 있따면 아래를 실행-->
+            <li class="page-item">
+            <a class="page-link" href="?page={{posts.previous_page_number}}" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+            </li>
+            {%endif%}
+            
+            
+            <li class="page-item"><a class="page-link" href="?page={{posts.number}}">{{posts.number}}</a></li>
+            <li class="page-item"><a class="page-link" href="#">of</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{posts.paginator.num_pages}}">{{posts.paginator.num_pages}}</a></li>
+            
+            {%if posts.has_next%}
+            <li class="page-item">
+            <a class="page-link" href="?page={{posts.next_page_number}}" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+            </li>
+            {%endif%}
+        </ul>
+    </nav>
+    </div>
+
+
 {% endblock %}
+</body>
+
